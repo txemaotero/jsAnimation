@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rectangle Animation</title>
+        <style>
+canvas {
+    border: 1px solid #000;
+}
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="400" height="400"></canvas>
+        <button onclick="startStop()">Start/Stop</button>
+        <div>
+            <input id="slider" type="range" name="Progress" min="0" max="1000" step="1", value="0" style="width: 400px;" oninput="updateProgress()"></input>
+        </div>
+
+        <script src="./js/main.js"></script>
+    </body>
+</html>
+
