@@ -1,6 +1,6 @@
 // Get the canvas element
-const canvas = document.getElementById('myCanvas');
-const context = canvas.getContext('2d');
+const canvas: HTMLCanvasElement = document.getElementById('myCanvas') as HTMLCanvasElement;
+const context = canvas.getContext('2d')!;
 
 // Define the initial position and dimensions of the rectangle
 let x = Math.random() * 400;
@@ -15,29 +15,38 @@ let windowID = 0;
 
 
 class Vector {
+    x: number;
+    y: number;
     constructor(x = 0., y = 0.) {
         this.x = x;
         this.y = y;
     }
 
-    add(other) {
+    add(other: Vector): Vector {
         return new Vector(this.x + other.x, this.y + other.y)
     }
 
-    sub(other) {
+    sub(other: Vector): Vector {
         return new Vector(this.x - other.x, this.y - other.y)
     }
 
-    prod(scalar) {
+    prod(scalar: number) : Vector {
         return new Vector(this.x * scalar, this.y * scalar)
     }
 
-    copy() {
+    copy() : Vector {
         return new Vector(this.x, this.y)
     }
 }
 
 class Rectangle {
+    position: Vector;
+    velocity: Vector;
+    length: number;
+    width: number;
+    orientation: number;
+    yawRate: number;
+
     constructor(position = new Vector(), velocity = new Vector(), length = 10, width = 10, orientation = 0, yawRate = 0) {
         this.position = position;
         this.velocity = velocity;
@@ -59,9 +68,9 @@ class Rectangle {
 }
 
 function createRectangleSeries(frames = 1000) {
-    let rectangles = new Array(frames).fill(0);
+    let rectangles: Rectangle[] = [];
     let origin = new Rectangle(new Vector(20, 20), new Vector(2, 1), 20, 10, 45, 2)
-    for (i = 0; i < frames; ++i) {
+    for (let i = 0; i < frames; ++i) {
         rectangles[i] = origin.copy();
         origin.move();
         if (origin.position.x < 1 || origin.position.x > canvas.width) {
@@ -74,25 +83,27 @@ function createRectangleSeries(frames = 1000) {
     return rectangles
 }
 
-const frames = 10000;
-document.getElementById("slider").max = frames;
-let rectangles = createRectangleSeries(frames);
+const FRAMES: number = 10000;
+const slider: HTMLInputElement = document.getElementById("slider") as HTMLInputElement;
+slider.max = FRAMES.toString();
+
+let rectangles = createRectangleSeries(FRAMES);
 let current_frame = 0
 
 function updateProgress() {
-    let val = parseInt(document.getElementById("slider").value);
-    if (val < 0 || val >= frames) {
+    let val = parseInt(slider.value);
+    if (val < 0 || val >= FRAMES) {
         return;
     }
     current_frame = val;
     if (paused){
         start()
-        stop()
+        stopAnim()
     }
 }
 
 
-function drawRectangle(rect) {
+function drawRectangle(rect: Rectangle) {
     context.save();
 
     // Translate to the center of the rectangle
@@ -115,11 +126,11 @@ function animate() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     drawRectangle(rectangles[current_frame]);
-    drawRectangle(rectangles[(current_frame + frames/2) % frames]);
+    drawRectangle(rectangles[(current_frame + FRAMES/2) % FRAMES]);
     current_frame += 1;
-    document.getElementById("slider").value = current_frame;
+    slider.value = current_frame.toString();
 
-    if (current_frame == frames){
+    if (current_frame == FRAMES){
         paused = true;
         return
     }
@@ -132,11 +143,11 @@ function startStop() {
     if (paused) {
         start()
     } else {
-        stop()
+        stopAnim()
     }
 }
 
-function stop() {
+function stopAnim() {
     cancelAnimationFrame(windowID);
     paused = true;
 }
