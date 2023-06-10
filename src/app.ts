@@ -2,70 +2,12 @@
 const canvas: HTMLCanvasElement = document.getElementById('myCanvas') as HTMLCanvasElement;
 const context = canvas.getContext('2d')!;
 
+
 // Define the initial position and dimensions of the rectangle
-let x = Math.random() * 400;
-let y = Math.random() * 400;
-let width = 100;
-const height = 50;
 let paused = false;
 
-let xsign = 1;
-let ysign = 1;
 let windowID = 0;
 
-
-class Vector {
-    x: number;
-    y: number;
-    constructor(x = 0., y = 0.) {
-        this.x = x;
-        this.y = y;
-    }
-
-    add(other: Vector): Vector {
-        return new Vector(this.x + other.x, this.y + other.y)
-    }
-
-    sub(other: Vector): Vector {
-        return new Vector(this.x - other.x, this.y - other.y)
-    }
-
-    prod(scalar: number) : Vector {
-        return new Vector(this.x * scalar, this.y * scalar)
-    }
-
-    copy() : Vector {
-        return new Vector(this.x, this.y)
-    }
-}
-
-class Rectangle {
-    position: Vector;
-    velocity: Vector;
-    length: number;
-    width: number;
-    orientation: number;
-    yawRate: number;
-
-    constructor(position = new Vector(), velocity = new Vector(), length = 10, width = 10, orientation = 0, yawRate = 0) {
-        this.position = position;
-        this.velocity = velocity;
-        this.length = length;
-        this.width = width;
-        this.orientation = orientation;
-        this.yawRate = yawRate;
-    }
-
-    move(delta_t = 1) {
-        this.position = this.position.add(this.velocity.prod(delta_t));
-        this.orientation = this.orientation + this.yawRate * delta_t;
-    }
-
-    copy() {
-        return new Rectangle(this.position.copy(), this.velocity.copy(), this.length,
-            this.width, this.orientation)
-    }
-}
 
 function createRectangleSeries(frames = 1000) {
     let rectangles: Rectangle[] = [];

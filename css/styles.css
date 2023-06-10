@@ -1,0 +1,34 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 40px); /* Subtract the height of the button from the canvas height */
+}
+
+button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+input[type="range"] {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+}
