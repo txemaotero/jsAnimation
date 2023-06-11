@@ -53,12 +53,18 @@ class Rectangle {
         );
     }
 
-    static random(max_x: number, max_y: number) {
+    static random(x_limits: Limits, y_limits: Limits) {
         return new Rectangle(
-            new Vector(Math.random() * max_x, Math.random() * max_y),
-            new Vector(Math.random() * 10, Math.random() * 10),
-            Math.random() * 100,
-            Math.random() * 100,
+            new Vector(
+                Math.random() * x_limits.window() + x_limits.min,
+                Math.random() * y_limits.window() + y_limits.min
+            ),
+            new Vector(
+                Math.random() * x_limits.window() * 0.05,
+                Math.random() * y_limits.window() * 0.05
+            ),
+            Math.random() * x_limits.window() * 0.1,
+            Math.random() * y_limits.window() * 0.1,
             Math.random() * 2 * Math.PI,
             (Math.random() * 2 * Math.PI) / 30
         );

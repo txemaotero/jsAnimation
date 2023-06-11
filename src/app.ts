@@ -16,11 +16,16 @@ const slider: HTMLInputElement = document.getElementById("slider") as HTMLInputE
 slider.max = FRAMES.toString();
 
 const rectangles: Rectangle[] = [];
-for (let i = 0; i < 10; i++) {
-    rectangles.push(Rectangle.random(canvas.width, canvas.height));
-}
-const simulator = new Simulator(canvas, rectangles);
+const simulator = new Simulator(rectangles);
 const drawer = new Drawer(canvas, context, simulator);
+
+const x_limits = drawer.coordinate_system.getXLimits();
+const y_limits = drawer.coordinate_system.getYLimits();
+
+for (let i = 0; i < 10; i++) {
+    simulator.rectangles.push(Rectangle.random(x_limits, y_limits));
+}
+
 const player = new Player(canvas, FRAMES, drawer.draw.bind(drawer));
 
 player.start();
