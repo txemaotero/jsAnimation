@@ -14,7 +14,7 @@ class Rectangle {
         width = 10,
         orientation = 0,
         yawRate = 0,
-        color = "blue"
+        color = null
     ) {
         this.position = position;
         this.velocity = velocity;
@@ -22,7 +22,20 @@ class Rectangle {
         this.width = width;
         this.orientation = orientation;
         this.yawRate = yawRate;
-        this.color = color;
+        if (color == null) {
+            this.color =
+                "rgba(" +
+                Math.floor(Math.random() * 255) +
+                "," +
+                Math.floor(Math.random() * 255) +
+                "," +
+                Math.floor(Math.random() * 255) +
+                "," +
+                (Math.random() * 0.5 + 0.5) +
+                ")";
+        } else {
+            this.color = color;
+        }
     }
 
     move(delta_t = 1) {
@@ -47,7 +60,7 @@ class Rectangle {
             Math.random() * 100,
             Math.random() * 100,
             Math.random() * 2 * Math.PI,
-            Math.random() * 2 * Math.PI/30
-            );
+            (Math.random() * 2 * Math.PI) / 30
+        );
     }
 }
