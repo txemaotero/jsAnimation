@@ -6,13 +6,14 @@
     </head>
     <body>
         <canvas id="myCanvas"></canvas>
-        <button onclick="startStop()">Start/Stop</button>
+        <button onclick="player.pauseResume()">Start/Stop</button>
         <div>
             <input id="slider" type="range" name="Progress" min="0" max="1000" step="1", value="0" oninput="updateProgress()"></input>
         </div>
 
         <script src="./dist/algebra.js"></script>
         <script src="./dist/shapes.js"></script>
+        <script src="./dist/player.js"></script>
         <script src="./dist/app.js"></script>
     </body>
 </html>

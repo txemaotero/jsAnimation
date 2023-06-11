@@ -5,14 +5,24 @@ class Rectangle {
     width: number;
     orientation: number;
     yawRate: number;
+    color: string;
 
-    constructor(position = new Vector(), velocity = new Vector(), length = 10, width = 10, orientation = 0, yawRate = 0) {
+    constructor(
+        position = new Vector(),
+        velocity = new Vector(),
+        length = 10,
+        width = 10,
+        orientation = 0,
+        yawRate = 0,
+        color = "blue"
+    ) {
         this.position = position;
         this.velocity = velocity;
         this.length = length;
         this.width = width;
         this.orientation = orientation;
         this.yawRate = yawRate;
+        this.color = color;
     }
 
     move(delta_t = 1) {
@@ -21,7 +31,23 @@ class Rectangle {
     }
 
     copy() {
-        return new Rectangle(this.position.copy(), this.velocity.copy(), this.length,
-            this.width, this.orientation)
+        return new Rectangle(
+            this.position.copy(),
+            this.velocity.copy(),
+            this.length,
+            this.width,
+            this.orientation
+        );
+    }
+
+    static random(max_x: number, max_y: number) {
+        return new Rectangle(
+            new Vector(Math.random() * max_x, Math.random() * max_y),
+            new Vector(Math.random() * 10, Math.random() * 10),
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 2 * Math.PI,
+            Math.random() * 2 * Math.PI/30
+            );
     }
 }
