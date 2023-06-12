@@ -5,3 +5,9 @@ button.addEventListener("click", () => {
     player.pauseResume();
 });
 
+window.addEventListener("resize", () => {
+    canvas.width = document.body.clientWidth;
+    canvas.height = document.body.clientHeight;
+    player.refresh();
+});
+

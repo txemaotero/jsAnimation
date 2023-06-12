@@ -97,5 +97,9 @@ class Player {
         this.jumpTo(this.current_frame + 1);
     }
 
+    refresh() {
+        this.jumpTo(this.current_frame);
+    }
+
 }
 

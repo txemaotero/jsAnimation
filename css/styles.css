@@ -40,7 +40,23 @@ input[type="range"] {
 }
 
 .videoControlRow button {
-    margin: 0 10px;
+    margin: 0 20px;
+
+    width: 80px;
+    height: 50px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+    &:hover {
+        border-color: transparent transparent transparent #404040;
+    }
+}
+.videoControlRow button span.icon {
+    font-size: 60px;
+    color: #000; /* Change the color as desired */
+    transition: opacity 0.2s;
 }
 
 .play-pause-button {

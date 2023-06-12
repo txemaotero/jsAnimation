@@ -2,14 +2,10 @@
 const canvas: HTMLCanvasElement = document.getElementById(
     "myCanvas"
 ) as HTMLCanvasElement;
-const context = canvas.getContext("2d")!;
+canvas.width = document.body.clientWidth;
+canvas.height = document.body.clientHeight;
 
-function resizeCanvas() {
-    canvas.width = document.body.clientWidth;
-    canvas.height = document.body.clientHeight;
-}
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
+const context = canvas.getContext("2d")!;
 
 const FRAMES: number = 10000;
 
@@ -24,7 +20,6 @@ const drawer = new Drawer(canvas, context, simulator);
 
 const x_limits = drawer.coordinate_system.getXLimits();
 const y_limits = drawer.coordinate_system.getYLimits();
-
 for (let i = 0; i < 10; i++) {
     simulator.rectangles.push(Rectangle.random(x_limits, y_limits));
 }
