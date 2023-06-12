@@ -33,12 +33,11 @@ const player = new Player(
         slider.value = frame.toString();
     }
 );
+const pan_handler = new PanHandler(canvas, drawer.coordinate_system, player);
 
 slider.addEventListener("input", () => {
     player.pause();
     player.jumpTo(parseInt(slider.value));
 });
-
-
 
 player.start();

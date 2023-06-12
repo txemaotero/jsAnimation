@@ -7,24 +7,24 @@
 </head>
 
 <body>
-    <canvas id="myCanvas"></canvas>
+    <div id="canvasDiv">
+        <canvas id="myCanvas"></canvas>
+    </div>
 
-    <div class="container">
-        <div class="videoControlRow">
-            <button onclick="player.oneBack()">
-                <span class="icon">
-                    &#8676
-                </span>
-            </button>
+    <div class="videoControlRow">
+        <button onclick="player.oneBack()">
+            <span class="icon">
+                &#8676
+            </span>
+        </button>
 
-            <div class="play-pause-button"></div>
+        <div class="play-pause-button"></div>
 
-            <button onclick="player.oneForward()">
-                <span class="icon">
-                    &#8677
-                </span>
-            </button>
-        </div>
+        <button onclick="player.oneForward()">
+            <span class="icon">
+                &#8677
+            </span>
+        </button>
     </div>
 
     <div>
@@ -38,6 +38,7 @@
     <script src="./dist/simulator.js"></script>
     <script src="./dist/drawer.js"></script>
     <script src="./dist/player.js"></script>
+    <script src="./dist/panning.js"></script>
     <script src="./dist/app.js"></script>
     <script src="./dist/ui.js"></script>
 </body>
