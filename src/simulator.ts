@@ -19,15 +19,23 @@ class Simulator {
         if (this.bounds != null) {
             const xlims = this.bounds.getXLimits();
             const ylims = this.bounds.getYLimits();
+            let sign = 1;
+            if (delta_t < 0) {
+                delta_t = -delta_t;
+                sign = -1;
+            }
             for (let i = 0; i < delta_t; i++) {
-                rect.move();
-                let place = xlims.place(rect.position.x);
-                if (place != Placement.Between) {
+                rect.move(sign);
+                const placeX = xlims.place(rect.position.x);
+                if (placeX != Placement.Between) {
                     rect.velocity.x *= -1;
                 }
-                place = ylims.place(rect.position.y);
-                if (place != Placement.Between) {
+                const placeY = ylims.place(rect.position.y);
+                if (placeY != Placement.Between) {
                     rect.velocity.y *= -1;
+                }
+                if (placeX != Placement.Between || placeY != Placement.Between) {
+                    rect.move(sign);
                 }
             }
         } else {

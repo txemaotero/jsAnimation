@@ -60,8 +60,8 @@ class Rectangle {
                 Math.random() * y_limits.window() + y_limits.min
             ),
             new Vector(
-                Math.random() * x_limits.window() * 0.05,
-                Math.random() * y_limits.window() * 0.05
+                (Math.random()*2 - 1) * x_limits.window() * 0.01,
+                (Math.random()*2 - 1) * y_limits.window() * 0.01
             ),
             Math.random() * x_limits.window() * 0.1,
             Math.random() * y_limits.window() * 0.1,

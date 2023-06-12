@@ -19,7 +19,7 @@ class Drawer {
     drawAxis() {
         this.context.beginPath();
         const origin = this.coordinate_system.getOrigin();
-        this.context.lineWidth = 2;
+        this.context.lineWidth = 1;
         this.context.strokeStyle = "rgba(0,0,0,1)";
         this.context.moveTo(0, origin.y);
         this.context.lineTo(this.canvas.width, origin.y);
@@ -31,19 +31,19 @@ class Drawer {
     drawGrid() {
         // draw grid with 1 meter spacing and thinner lines
         this.context.beginPath();
-        this.markSpuareGrid(1, 0.5);
+        this.markSpuareGrid(1, 0.1);
         this.context.stroke();
 
         this.context.beginPath();
-        this.markSpuareGrid(5, 1);
+        this.markSpuareGrid(5, 0.3);
         this.context.stroke();
         // draw x and y axis on top
         this.drawAxis();
     }
 
-    private markSpuareGrid(x_spacing: number, linewidth: number) {
-        this.context.strokeStyle = "rgba(0,0,0,0.1)";
-        this.context.lineWidth = linewidth;
+    private markSpuareGrid(x_spacing: number, linealpha: number) {
+        this.context.strokeStyle = "rgba(0,0,0," + linealpha.toString() + ")";
+        this.context.lineWidth = 1;
         const x_limits = this.coordinate_system.getXLimits();
         const y_limits = this.coordinate_system.getYLimits();
         let pos = 0;

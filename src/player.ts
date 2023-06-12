@@ -7,6 +7,7 @@ class Player {
     frames: number;
     frame_rate: number;
     draw: (frame: number, context: CanvasRenderingContext2D) => void;
+    onFrameChange: ((frame: number) => void) | null;
 
     static readonly PX_TO_METERS: number = 50;
 
@@ -14,7 +15,8 @@ class Player {
         canvas: HTMLCanvasElement,
         frames: number,
         draw: (frame: number, context: CanvasRenderingContext2D) => void,
-        frame_rate: number = 60
+        frame_rate: number = 60,
+        frame_change_callback: ((frame: number) => void) | null = null
     ) {
         this.canvas = canvas;
         this.context = canvas.getContext("2d")!;
@@ -24,22 +26,30 @@ class Player {
         this.frames = frames;
         this.frame_rate = frame_rate;
         this.draw = draw;
+        this.onFrameChange = frame_change_callback;
     }
 
     animate() {
         if (this.paused) {
             return;
         }
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        this.clearCanvas();
         this.draw(this.current_frame, this.context);
         this.current_frame++;
         if (this.current_frame >= this.frames) {
             this.current_frame = 0;
         }
+        if (this.onFrameChange != null) {
+            this.onFrameChange(this.current_frame);
+        }
         this.windowID = window.setTimeout(
             this.animate.bind(this),
             1000 / this.frame_rate
         );
+    }
+
+    clearCanvas() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     start() {
@@ -69,5 +79,23 @@ class Player {
             this.pause();
         }
     }
+
+    jumpTo(frame: number) {
+        this.current_frame = frame;
+        this.clearCanvas();
+        this.draw(this.current_frame, this.context);
+        if (this.onFrameChange != null) {
+            this.onFrameChange(this.current_frame);
+        }
+    }
+
+    oneBack() {
+        this.jumpTo(this.current_frame - 1);
+    }
+
+    oneForward() {
+        this.jumpTo(this.current_frame + 1);
+    }
+
 }
 
