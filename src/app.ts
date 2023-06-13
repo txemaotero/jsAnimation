@@ -34,6 +34,8 @@ const player = new Player(
     }
 );
 const pan_handler = new PanHandler(canvas, drawer.coordinate_system, player);
+const zoom_handler = new ZoomHandler(canvas, drawer.coordinate_system, player);
+
 
 slider.addEventListener("input", () => {
     player.pause();

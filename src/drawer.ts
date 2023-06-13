@@ -46,33 +46,19 @@ class Drawer {
         this.context.lineWidth = 1;
         const x_limits = this.coordinate_system.getXLimits();
         const y_limits = this.coordinate_system.getYLimits();
-        let pos = 0;
-        while (x_limits.contains(pos)) {
-            pos -= x_spacing;
+        let pos = Math.floor(x_limits.min / x_spacing) * x_spacing ;
+        while (pos < x_limits.max) {
             const pos_px = this.coordinate_system.convertX(pos);
             this.context.moveTo(pos_px, 0);
             this.context.lineTo(pos_px, this.canvas.height);
-        }
-        pos = 0;
-        while (x_limits.contains(pos)) {
             pos += x_spacing;
-            const pos_px = this.coordinate_system.convertX(pos);
-            this.context.moveTo(pos_px, 0);
-            this.context.lineTo(pos_px, this.canvas.height);
         }
-        pos = 0;
-        while (y_limits.contains(pos)) {
-            pos -= x_spacing;
+        pos = Math.floor(y_limits.min / x_spacing) * x_spacing ;
+        while (pos < y_limits.max) {
             const pos_px = this.coordinate_system.convertY(pos);
             this.context.moveTo(0, pos_px);
             this.context.lineTo(this.canvas.width, pos_px);
-        }
-        pos = 0;
-        while (y_limits.contains(pos)) {
             pos += x_spacing;
-            const pos_px = this.coordinate_system.convertY(pos);
-            this.context.moveTo(0, pos_px);
-            this.context.lineTo(this.canvas.width, pos_px);
         }
     }
 
