@@ -9,8 +9,6 @@ class Player {
     draw: (frame: number, context: CanvasRenderingContext2D) => void;
     onFrameChange: ((frame: number) => void) | null;
 
-    static readonly PX_TO_METERS: number = 50;
-
     constructor(
         canvas: HTMLCanvasElement,
         frames: number,

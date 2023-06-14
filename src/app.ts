@@ -15,12 +15,13 @@ const slider: HTMLInputElement = document.getElementById(
 slider.max = FRAMES.toString();
 
 const rectangles: Rectangle[] = [];
+
 const simulator = new Simulator(rectangles);
 const drawer = new Drawer(canvas, context, simulator);
 
 const x_limits = drawer.coordinate_system.getXLimits();
 const y_limits = drawer.coordinate_system.getYLimits();
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 20; i++) {
     simulator.rectangles.push(Rectangle.random(x_limits, y_limits));
 }
 
