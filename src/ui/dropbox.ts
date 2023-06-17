@@ -46,7 +46,7 @@ function initializeDropbox() {
 
     dropzone.addEventListener("dragover", (e) => {
         e.preventDefault();
-        dropzone.style.backgroundColor = "#e9ecef";
+        dropzone.style.backgroundColor = "#202020";
     });
 
     dropzone.addEventListener("dragleave", function(event) {
