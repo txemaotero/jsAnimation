@@ -13,6 +13,7 @@ window.addEventListener('keydown', (event: KeyboardEvent) => {
     } else if (event.key === 'h') {
         player.oneBack();
     } else if (event.key === 'r') {
+        player.stop();
         player.start();
     }
 });

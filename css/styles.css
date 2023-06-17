@@ -82,3 +82,32 @@ input[type="range"] {
         border-color: transparent transparent transparent #404040;
     }
 }
+
+.dropbox_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.dropbox {
+    width: 50%;
+    height: 50%;
+    border-radius: 20px;
+    border-style: dashed;
+    border-width: 5px;
+    border-color: #202020;
+    background-color: #404040;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    line-height: 100px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    &:hover {
+        border-color: #404040;
+        background-color: #202020;
+    }
+    box-sizing: border-box;
+}

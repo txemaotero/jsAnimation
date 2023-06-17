@@ -7,28 +7,43 @@
 </head>
 
 <body>
-    <div id="canvasDiv">
-        <canvas id="myCanvas"></canvas>
+    <div hidden id="animation">
+        <div id="canvasDiv">
+            <canvas id="myCanvas"></canvas>
+        </div>
+
+        <div class="video_control">
+            <div class="videoControlRow">
+                <button onclick="player.oneBack()">
+                    <span class="icon">
+                        &#8676
+                    </span>
+                </button>
+
+                <div class="play-pause-button"></div>
+
+                <button onclick="player.oneForward()">
+                    <span class="icon">
+                        &#8677
+                    </span>
+                </button>
+            </div>
+
+            <div>
+                <input id="slider" type="range" name="Progress" min="0" max="1000" step="1" value="0"></input>
+            </div>
+
+        </div>
     </div>
 
-    <div class="videoControlRow">
-        <button onclick="player.oneBack()">
-            <span class="icon">
-                &#8676
-            </span>
-        </button>
+    <div class="dropbox_container">
+        <div class="dropbox" id="drop_file">
+            <h1>Drop here your file</h1>
+            <p>or</p>
+            <p>Click here to select one</p>
 
-        <div class="play-pause-button"></div>
+        </div>
 
-        <button onclick="player.oneForward()">
-            <span class="icon">
-                &#8677
-            </span>
-        </button>
-    </div>
-
-    <div>
-        <input id="slider" type="range" name="Progress" min="0" max="1000" step="1" value="0"></input>
     </div>
 
     <script src="./dist/utils/limits.js"></script>
@@ -42,6 +57,7 @@
     <script src="./dist/ui/zooming.js"></script>
     <script src="./dist/app.js"></script>
     <script src="./dist/ui/listeners.js"></script>
+    <script src="./dist/ui/dropbox.js"></script>
 </body>
 
 </html>
