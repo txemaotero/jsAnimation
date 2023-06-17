@@ -8,6 +8,7 @@ class Player {
     frame_rate: number;
     draw: (frame: number, context: CanvasRenderingContext2D) => void;
     onFrameChange: ((frame: number) => void) | null;
+    last_frame_time: number;
 
     constructor(
         canvas: HTMLCanvasElement,
@@ -25,25 +26,27 @@ class Player {
         this.frame_rate = frame_rate;
         this.draw = draw;
         this.onFrameChange = frame_change_callback;
+        this.last_frame_time = 0;
     }
 
     animate() {
         if (this.paused) {
             return;
         }
-        this.clearCanvas();
-        this.draw(this.current_frame, this.context);
-        this.current_frame++;
-        if (this.current_frame >= this.frames) {
-            this.current_frame = 0;
+        const timestamp = Date.now();
+        if (timestamp - this.last_frame_time > 1000 / this.frame_rate) {
+            this.clearCanvas();
+            this.draw(this.current_frame, this.context);
+            this.current_frame++;
+            if (this.current_frame >= this.frames) {
+                this.current_frame = 0;
+            }
+            if (this.onFrameChange != null) {
+                this.onFrameChange(this.current_frame);
+            }
+            this.last_frame_time = timestamp;
         }
-        if (this.onFrameChange != null) {
-            this.onFrameChange(this.current_frame);
-        }
-        this.windowID = window.setTimeout(
-            this.animate.bind(this),
-            1000 / this.frame_rate
-        );
+        this.windowID = requestAnimationFrame(this.animate.bind(this));
     }
 
     clearCanvas() {
@@ -98,6 +101,4 @@ class Player {
     refresh() {
         this.jumpTo(this.current_frame);
     }
-
 }
-
